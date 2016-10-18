@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+//apply plugin: 'com.google.gms.google-services'
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.tnc.mvppattern"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+        debug {
+            versionNameSuffix "-SNAPSHOT"
+        }
+    }
+}
+
+dependencies {
+    final PLAY_SERVICES_VERSION = '9.6.0'
+    final FIREBASE_VERSION = '9.6.0'
+    final FIREBASE_UI_VERSION = "0.6.0"
+    final SUPPORT_LIBRARY_VERSION = '24.2.1'
+    final BUTTER_KNIFE_VERSION = '8.4.0'
+    final PICASSO_VERSION = '2.5.2'
+    final EVENTBUS_VERSION = '3.0.0'
+    final ESPRESSO_VERSION = '2.2.2'
+    final JUNIT_VERSION = '4.12'
+    final RETROFIT_VERSION = '2.0.0-beta2'
+    final OKHTTP_VERSION = '2.7.0'
+    final DAGGER_VERSION = '2.0.2'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile "com.google.android.gms:play-services-analytics:$PLAY_SERVICES_VERSION"
+    //compile "com.google.android.gms:play-services-ads:$PLAY_SERVICES_VERSION"
+    //Places SERVICES
+    //compile "com.google.android.gms:play-services-places:$PLAY_SERVICES_VERSION"
+    // AUTH
+    //compile "com.google.firebase:firebase-auth:$FIREBASE_VERSION"
+    //DATABASE FIREBASE,UI
+    //compile "com.google.firebase:firebase-database:$FIREBASE_VERSION"
+    //compile "com.firebaseui:firebase-ui-database:$FIREBASE_UI_VERSION"
+    //STORAGE FIREBASE
+    //compile "com.google.firebase:firebase-storage:$FIREBASE_VERSION"
+
+    //Android support
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    //compile "com.android.support:percent:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+
+    compile "com.jakewharton:butterknife:$BUTTER_KNIFE_VERSION"
+    apt "com.jakewharton:butterknife-compiler:$BUTTER_KNIFE_VERSION"
+
+    //Image loading
+    compile "com.squareup.picasso:picasso:$PICASSO_VERSION"
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    //Event bus
+    compile "org.greenrobot:eventbus:$EVENTBUS_VERSION"
+
+    //Dependency injection
+    compile "com.google.dagger:dagger:$DAGGER_VERSION"
+    apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+
+    compile "com.squareup.retrofit:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit:adapter-rxjava:$RETROFIT_VERSION"
+    compile "com.squareup.okhttp:okhttp:$OKHTTP_VERSION"
+    compile "com.squareup.okhttp:logging-interceptor:$OKHTTP_VERSION"
+
+    //Widget
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.makeramen:roundedimageview:2.2.1'
+
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile "junit:junit:$JUNIT_VERSION"
+}
