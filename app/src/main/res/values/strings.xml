@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MVPPattern</string>
+
+    <string name="msg_error">Error</string>
+    <string name="msg_try_again">TRY AGAIN</string>
+
 </resources>
